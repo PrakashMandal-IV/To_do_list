@@ -11,7 +11,7 @@ namespace To_do_list.Data.Service
             _context = context;
         }
         //Add task
-        public void AddToList(ListVM list,string username)
+        public void AddToList(ListVM list, string username)
         {
             var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
             var _list = new TodoList()
@@ -34,21 +34,31 @@ namespace To_do_list.Data.Service
             if (!_task.IsCompleted)
             {
                 _task.IsCompleted = true;
-                
+
             }
             else _task.IsCompleted = false;
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
             _context.SaveChanges();
-            
+
         }
-        
+
         //get task of today
         public List<TodoList> GetTodayTask(string username)
         {
-            var _user = _context.Users.FirstOrDefault(n => n.UserName == username);          
-            var _task = _context.TodoList.Where(n => n.UserId == _user.Id && n.CreatedAt== DateTime.Today).ToList();
-            return _task;
+            var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
+                var _task = _context.TodoList.Where(n => n.UserId == _user.Id && n.CreatedAt == DateTime.Today).ToList();
+                return _task;      
             
+        }
+
+        //delete task
+        public void DeleteTask(int id)
+        {
+            var _task = _context.TodoList.FirstOrDefault(n => n.Id == id);
+            if (_task != null)
+            {
+                _context.TodoList.Remove(_task);
+            }
         }
     }
 }

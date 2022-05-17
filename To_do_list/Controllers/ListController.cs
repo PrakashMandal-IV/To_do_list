@@ -36,6 +36,12 @@ namespace To_do_list.Controllers
             var _result =_list.GetTodayTask(username);
             return Ok(_result);
         }
+        [HttpDelete("delete-task/{id}")]
+        public ActionResult DeleteTask(int id)
+        {
+            _list.DeleteTask(id);
+            return Ok();
+        }
 
     }
 }
