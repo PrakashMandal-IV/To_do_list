@@ -32,6 +32,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnectionString"));
 });
 builder.Services.AddTransient<RegistationService>();
+builder.Services.AddTransient<LoginService>();
 
 var app = builder.Build();
 

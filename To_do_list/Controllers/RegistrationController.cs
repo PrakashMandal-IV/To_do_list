@@ -9,6 +9,7 @@ namespace To_do_list.Controllers
     public class RegistrationController : Controller
     {
         private RegistationService _registration;
+        
         public RegistrationController(RegistationService registration)
         {
             _registration = registration;
@@ -25,6 +26,6 @@ namespace To_do_list.Controllers
             {
                 return BadRequest("Username Already exist");
             }
-        }
+        }      
     }
 }
