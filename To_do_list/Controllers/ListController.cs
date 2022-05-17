@@ -29,6 +29,13 @@ namespace To_do_list.Controllers
             _list.UpdateStatus(id);
             return Ok();
         }
+        [HttpGet("get-today-task")]
+        public IActionResult GetTask()
+        {
+            var username = User.FindFirstValue(ClaimTypes.Name);
+            var _result =_list.GetTodayTask(username);
+            return Ok(_result);
+        }
 
     }
 }
