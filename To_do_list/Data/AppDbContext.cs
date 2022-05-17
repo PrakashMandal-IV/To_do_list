@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using To_do_list.Data.Model;
 
 namespace To_do_list.Data
 {
@@ -8,5 +9,7 @@ namespace To_do_list.Data
         {
 
         }
+        public DbSet<User> Users { get; set; } = default!;
+        public DbSet<TodoList> TodoList { get; set; } = default!;
     }
 }
