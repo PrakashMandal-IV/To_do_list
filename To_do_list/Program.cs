@@ -32,6 +32,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 builder.Services.AddTransient<RegistationService>();
 builder.Services.AddTransient<LoginService>();
+builder.Services.AddTransient<ListService>();
 
 var app = builder.Build();
 

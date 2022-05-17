@@ -24,7 +24,6 @@ namespace To_do_list.Data.Service
             _list.CreatedAt = DateTime.Now;
             _list.IsCompleted = false;
             _context.SaveChanges();
-
         }
     }
 }
