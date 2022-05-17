@@ -6,12 +6,12 @@ namespace To_do_list.Data.Service
 {
     public class RegistationService
     {
-        private AppDbContext _context;
-        private Hash _hash;
-        public RegistationService( AppDbContext appDbContext,Hash hash)
+        private readonly AppDbContext _context;
+        Hash hash = new Hash();
+        public RegistationService( AppDbContext appDbContext)
         {
             _context = appDbContext;
-            _hash = hash;
+           
         }
         public string RegisterUser(Registration registration)
         {
@@ -21,7 +21,7 @@ namespace To_do_list.Data.Service
             }
             else
             {
-                string pass = _hash.HashPass(registration.Password);
+                string pass = hash.HashPass(registration.Password);
                 var user = new User()
                 {
                     UserName = registration.Username,
@@ -33,8 +33,7 @@ namespace To_do_list.Data.Service
                  user.CreatedAt = DateTime.Now;
                 _context.SaveChanges();
                 return "Successfully Created";
-            }
-            
+            }         
         }
     }
 }
