@@ -21,7 +21,7 @@ namespace To_do_list.Data.Service
             };
             _context.TodoList.Add(_list);
             _list.UserId = _user?.Id;
-            _list.CreatedAt = DateTime.Now;
+            _list.CreatedAt = DateTime.Today;
             _list.IsCompleted = false;
             _context.SaveChanges();
         }
@@ -39,6 +39,16 @@ namespace To_do_list.Data.Service
             else _task.IsCompleted = false;
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
             _context.SaveChanges();
+            
+        }
+        
+        //get task of today
+        public List<TodoList> GetTodayTask(string username)
+        {
+            var _user = _context.Users.FirstOrDefault(n => n.UserName == username);          
+            var _task = _context.TodoList.Where(n => n.UserId == _user.Id && n.CreatedAt== DateTime.Today).ToList();
+            return _task;
+            
         }
     }
 }
