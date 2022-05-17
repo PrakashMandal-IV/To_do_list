@@ -26,7 +26,8 @@ namespace To_do_list.Controllers
         [HttpPost("update-status/{id}")]
         public ActionResult UpdateTaskStatus(int id)
         {
-            _list.UpdateStatus(id);
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+            _list.UpdateStatus(id, userName);
             return Ok();
         }
         [HttpGet("get-today-task")]
@@ -39,7 +40,8 @@ namespace To_do_list.Controllers
         [HttpDelete("delete-task/{id}")]
         public ActionResult DeleteTask(int id)
         {
-            _list.DeleteTask(id);
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+            _list.DeleteTask(id,userName);
             return Ok();
         }
 

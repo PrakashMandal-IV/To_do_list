@@ -27,9 +27,10 @@ namespace To_do_list.Data.Service
         }
 
         //Update status
-        public void UpdateStatus(int id)
+        public void UpdateStatus(int id,string username)
         {
-            var _task = _context.TodoList.FirstOrDefault(n => n.Id == id);
+            var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
+            var _task = _context.TodoList.FirstOrDefault(n => n.Id == id&& n.Id == _user.Id);
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
             if (!_task.IsCompleted)
             {
@@ -52,9 +53,10 @@ namespace To_do_list.Data.Service
         }
 
         //delete task
-        public void DeleteTask(int id)
+        public void DeleteTask(int id,string username)
         {
-            var _task = _context.TodoList.FirstOrDefault(n => n.Id == id);
+            var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
+            var _task = _context.TodoList.FirstOrDefault(n => n.Id == id && n.UserId == _user.Id);
             if (_task != null)
             {
                 _context.TodoList.Remove(_task);
