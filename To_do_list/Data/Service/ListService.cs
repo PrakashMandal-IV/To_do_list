@@ -14,7 +14,7 @@ namespace To_do_list.Data.Service
         public void AddToList(ListVM list, string username)
         {
             var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
-            var _list = new TodoList()
+            var _list = new Model.TaskList()
             {
                 Title = list.Title,
                 WhatToDo = list.WhatToDo,
@@ -51,7 +51,7 @@ namespace To_do_list.Data.Service
         }
 
         //get task of today
-        public List<TodoList>? GetTodayTask(string username)
+        public List<Model.TaskList>? GetTodayTask(string username)
         {
                 var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
             if (_user != null)

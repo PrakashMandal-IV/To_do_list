@@ -10,6 +10,6 @@ namespace To_do_list.Data
 
         }
         public DbSet<User> Users { get; set; } = default!;
-        public DbSet<TodoList> TodoList { get; set; } = default!;
+        public DbSet<TaskList> TodoList { get; set; } = default!;
     }
 }

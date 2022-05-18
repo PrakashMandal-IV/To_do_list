@@ -1,6 +1,6 @@
 ﻿namespace To_do_list.Data.Model
 {
-    public class TodoList
+    public class TaskList
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
