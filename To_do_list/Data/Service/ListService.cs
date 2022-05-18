@@ -5,7 +5,7 @@ namespace To_do_list.Data.Service
 {
     public class ListService
     {
-        private AppDbContext _context;
+        private readonly AppDbContext _context;
         public ListService(AppDbContext context)
         {
             _context = context;
@@ -30,25 +30,42 @@ namespace To_do_list.Data.Service
         public void UpdateStatus(int id,string username)
         {
             var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
-            var _task = _context.TodoList.FirstOrDefault(n => n.Id == id&& n.Id == _user.Id);
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-            if (!_task.IsCompleted)
+            if (_user != null)
             {
-                _task.IsCompleted = true;
+                var _task = _context.TodoList.Where(n => n.Id == id && n.UserId == _user.Id).FirstOrDefault();
+                if (_task == null)
+                {
 
+                }
+                else if (!_task.IsCompleted)
+                {
+                    _task.IsCompleted = true;
+                }
+                else _task.IsCompleted = false;
+
+
+                _context.SaveChanges();
             }
-            else _task.IsCompleted = false;
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
-            _context.SaveChanges();
+            
 
         }
 
         //get task of today
-        public List<TodoList> GetTodayTask(string username)
+        public List<TodoList>? GetTodayTask(string username)
         {
-            var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
+                var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
+            if (_user != null)
+            {
                 var _task = _context.TodoList.Where(n => n.UserId == _user.Id && n.CreatedAt == DateTime.Today).ToList();
-                return _task;      
+                if (_task != null)
+                {
+                    return _task;
+                }
+                else return null;
+            }
+            else return null;
+            
+                   
             
         }
 
@@ -56,10 +73,13 @@ namespace To_do_list.Data.Service
         public void DeleteTask(int id,string username)
         {
             var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
-            var _task = _context.TodoList.FirstOrDefault(n => n.Id == id && n.UserId == _user.Id);
-            if (_task != null)
+            if (_user != null)
             {
-                _context.TodoList.Remove(_task);
+                var _task = _context.TodoList.FirstOrDefault(n => n.Id == id && n.UserId == _user.Id);
+                if (_task != null)
+                {
+                    _context.TodoList.Remove(_task);
+                }
             }
         }
     }
