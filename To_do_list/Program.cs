@@ -56,7 +56,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigin,
                       policy =>
                       {
-                          policy.WithOrigins("http://127.0.0.1:5500")
+                          policy.AllowAnyOrigin()
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                       });
@@ -70,6 +70,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 } 
 app.UseCors(MyAllowSpecificOrigin);
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 

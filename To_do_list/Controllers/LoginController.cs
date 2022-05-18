@@ -14,7 +14,7 @@ namespace To_do_list.Controllers
             _loginService = loginService;   
         }      
         [HttpPost("login")]
-        public ActionResult<string> UserLogin([FromBody] LoginVM login)
+        public IActionResult UserLogin([FromBody] LoginVM login)
         {
             string _result = _loginService.Login(login);
             if( _result == "Invalid Details")
@@ -23,7 +23,7 @@ namespace To_do_list.Controllers
             }
             else
             {
-                return _result;
+                return Ok(_result);
             }
         }
     } 

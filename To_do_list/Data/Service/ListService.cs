@@ -70,17 +70,25 @@ namespace To_do_list.Data.Service
         }
 
         //delete task
-        public void DeleteTask(int id,string username)
+        public string DeleteTask(int id,string username)
         {
             var _user = _context.Users.FirstOrDefault(n => n.UserName == username);
             if (_user != null)
             {
-                var _task = _context.TodoList.FirstOrDefault(n => n.Id == id && n.UserId == _user.Id);
+                var _task = _context.TodoList.Where(n => n.Id == id && n.UserId == _user.Id).FirstOrDefault();
                 if (_task != null)
                 {
                     _context.TodoList.Remove(_task);
+                    _context.SaveChanges();
+                    return "Success";
+                }
+                else
+                {
+                    return "task not found";
                 }
             }
+            return "user not found";
+
         }
     }
 }

@@ -23,7 +23,7 @@ namespace To_do_list.Controllers
             _list.AddToList(listVM, userName);
             return Ok();
         }
-        [HttpPost("update-status/{id}")]
+        [HttpPut("update-status/{id}")]
         public ActionResult UpdateTaskStatus(int id)
         {
             var userName = User.FindFirstValue(ClaimTypes.Name);
@@ -41,8 +41,12 @@ namespace To_do_list.Controllers
         public ActionResult DeleteTask(int id)
         {
             var userName = User.FindFirstValue(ClaimTypes.Name);
-            _list.DeleteTask(id,userName);
-            return Ok();
+           var _response= _list.DeleteTask(id,userName);
+            if(_response == "Success")
+            {
+                return Ok(_response);
+            }
+            return BadRequest(Response);
         }
 
     }

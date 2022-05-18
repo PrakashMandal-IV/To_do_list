@@ -30,6 +30,12 @@ namespace To_do_list.Data.Service
                 return "Invalid Details";
             }
         }
+        //get user detail
+        public User? GetUser(string name)
+        {
+            var _user = _context.Users.FirstOrDefault(n => n.UserName == name);
+            return _user;
+        }
 
 
         public string CreateUserToken(User user)
