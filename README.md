@@ -34,6 +34,5 @@ I used SHA256 hasing alogrithm for hasing password
 ![alt text](Images/status.png)
 
 ## Delete task
-## Register
 ![alt text](Images/delete.png)
 
