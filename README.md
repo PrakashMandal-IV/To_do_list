@@ -15,6 +15,11 @@ Microsoft EntityFrameWorkCore.SqlServer
 </br>
 Microsoft.AspNetCore.Authentication.JwtBearer
 
+## **Note**
+If the address of the backend is something other then **localhost:5003**
+</br>
+then change is at line 13 of front end javascript once , it will change all the endpoint list
+
 ## Login
 I used SHA256 hasing alogrithm for hasing password 
 ![alt text](Images/Main_page.png)
